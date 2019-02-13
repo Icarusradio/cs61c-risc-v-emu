@@ -1,7 +1,2 @@
-# RISC-V Instruction Set Emulator
-This is a project of [UC Berkeley CS61C course](https://cs61c.org/).
-References:
- - [Fall 2017](http://www-inst.eecs.berkeley.edu/~cs61c/fa17/projs/01) (Branch fa17)
- - [Spring 2018](http://www-inst.eecs.berkeley.edu/~cs61c/sp18/projs/02-1/) (Branch sp18)
- - [Summer 2018](http://www-inst.eecs.berkeley.edu/~cs61c/su18/projs/02-1/)
- 
+# RISC-V Instruction Set Emulator (2018 Spring Version)
+This is a project of UC Berkeley [CS61C](http://www-inst.eecs.berkeley.edu/~cs61c/sp18) course. [Reference](http://www-inst.eecs.berkeley.edu/~cs61c/sp18/projs/02-1/).
