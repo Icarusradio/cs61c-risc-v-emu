@@ -6,6 +6,11 @@
 /* WARNING: DO NOT CHANGE THIS FILE. 
  YOU SHOULD DEFINITELY CONSULT IT THOUGH... */
 
+/* GCC lets us add "attributes" to functions, function
+   parameters, etc. to indicate their properties.
+   See the GCC manual for details. */
+#define UNUSED __attribute__ ((unused))
+
 /* convenient(?) data definitions */
 typedef uint8_t  Byte; /* unsigned, 8-bit */
 typedef uint16_t Half; /* unsigned, 16-bit */
@@ -47,11 +52,11 @@ typedef enum {
    Seriously. They're fun. */
 typedef union {
    
-    /* access opcode with: instruction.opcode */
+    /* access opcode with: instruction.opcode.opcode */
     struct {
-	unsigned int opcode : 7;
+	    unsigned int opcode : 7;
         unsigned int : 25;
-    };
+    } opcode;
     
     /* access rtype with: instruction.rtype.(opcode|rd|funct3|rs1|rs2|funct7) */
     struct {
