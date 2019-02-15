@@ -1,7 +1,7 @@
 SOURCES := utils.c part1.c part2.c riscv.c
 HEADERS := types.h utils.h riscv.h
-CUNIT := -L/home/ff/cs61c/cunit/install/lib -I/home/ff/cs61c/cunit/install/include -lcunit
-CFLAGS := -g -std=gnu99 -Wall
+CUNIT := -lcunit
+CFLAGS := -g -Wpedantic -Wall -Wextra -Werror -std=c89
 
 
 ASM_TESTS := simple multiply random

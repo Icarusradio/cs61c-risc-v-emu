@@ -13,7 +13,7 @@ void test_parse_instruction_sbtype();
 void test_parse_instruction_ujtype();
 void test_parse_instruction_utype();
 
-int main(int arc, char **argv) {
+int main() {
     CU_pSuite pSuite1 = NULL;
 
     if (CUE_SUCCESS != CU_initialize_registry()) {

@@ -1,5 +1,5 @@
-#include <stdio.h> // for stderr
-#include <stdlib.h> // for exit()
+#include <stdio.h> /* for stderr */
+#include <stdlib.h> /* for exit() */
 #include "types.h"
 #include "utils.h"
 
@@ -20,7 +20,7 @@ void write_branch(Instruction);
 
 void decode_instruction(uint32_t instruction_bits) {
     Instruction instruction = parse_instruction(instruction_bits);
-    switch(instruction.opcode) {
+    switch(instruction.opcode.opcode) {
         case 0x33:
             write_rtype(instruction);
             break;
@@ -45,7 +45,7 @@ void decode_instruction(uint32_t instruction_bits) {
         case 0x73:
             print_ecall(instruction);
             break;
-        default: // undefined opcode
+        default: /* undefined opcode */
             handle_invalid_instruction(instruction);
             break;
     }
@@ -230,7 +230,7 @@ void print_jal(Instruction instruction) {
     /* YOUR CODE HERE */
 }
 
-void print_ecall(Instruction instruction) {
+void print_ecall(Instruction instruction UNUSED) {
     /* YOUR CODE HERE */
 }
 

@@ -8,11 +8,12 @@
 #include <unistd.h>
 #include <string.h>
 #include <assert.h>
+#include <getopt.h>
 
 /* WARNING: DO NOT CHANGE THIS FILE.
  YOU PROBABLY DON'T EVEN NEED TO LOOK AT IT... */
 
-// Pointer to simulator memory
+/* Pointer to simulator memory */
 Byte *memory;
 
 void execute(Processor *processor,int prompt,int print) {
@@ -31,10 +32,10 @@ void execute(Processor *processor,int prompt,int print) {
     
     execute_instruction(instruction_bits, processor, memory);
     
-    // enforce $0 being hard-wired to 0
+    /* enforce $0 being hard-wired to 0 */
     processor->R[0] = 0;
     
-    // print trace
+    /* print trace */
     if(print) {
         int i,j;
         for(i=0;i<8;i++) {
@@ -43,33 +44,33 @@ void execute(Processor *processor,int prompt,int print) {
             }
             puts("");
         }
-	printf("\n");
+    printf("\n");
     }
 }
 
-void load_program(uint8_t *mem, size_t memsize, int startaddr, const char *filename, int disasm) {
+void load_program(uint8_t *mem, size_t memsize UNUSED, int startaddr, const char *filename, int disasm) {
     FILE *file = fopen(filename, "r");
     const int MAX_SIZE = 50;
-    char line[MAX_SIZE];
+    char line[50];
     int instruction, offset = 0;    
 
     while (fgets(line, MAX_SIZE, file) != NULL) {
         instruction = (int32_t) strtol(line, NULL, 16);
         mem[startaddr + offset] = instruction & 0xFF;
-	mem[startaddr + offset + 1] = (instruction >> 8) & 0xFF;
-	mem[startaddr + offset + 2] = (instruction >> 16) & 0xFF;
-	mem[startaddr + offset + 3] = (instruction >> 24) & 0xFF;
+    mem[startaddr + offset + 1] = (instruction >> 8) & 0xFF;
+    mem[startaddr + offset + 2] = (instruction >> 16) & 0xFF;
+    mem[startaddr + offset + 3] = (instruction >> 24) & 0xFF;
         if (disasm) {
-	    printf("%08x: ", startaddr + offset);
+        printf("%08x: ", startaddr + offset);
             decode_instruction((uint32_t) instruction);
-	}
+    }
         offset += 4;
     } 
 }
 
 int main(int argc,char** argv) {
     /* options */
-    int opt_disasm = 0,opt_regdump = 0,opt_interactive = 0;
+    int opt_disasm = 0,opt_regdump = 0,opt_interactive = 0, i;
     
     /* the architectural state of the CPU */
     Processor processor;
@@ -106,7 +107,7 @@ int main(int argc,char** argv) {
     
     /* load the executable into memory */
     assert(memory == NULL);
-    memory = calloc(MEMORY_SPACE,sizeof(uint8_t)); // allocate zeroed memory
+    memory = calloc(MEMORY_SPACE,sizeof(uint8_t)); /* allocate zeroed memory */
     assert(memory != NULL);
   
     /* SEt the PC to 0x1000 */ 
@@ -120,7 +121,6 @@ int main(int argc,char** argv) {
     
     /* initialize the CPU */
     /* zero out all registers */
-    int i;
     for(i=0;i<32;i++) {
         processor.R[i] = 0;
     }
