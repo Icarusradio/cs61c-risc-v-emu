@@ -8,11 +8,12 @@
 #include <unistd.h>
 #include <string.h>
 #include <assert.h>
+#include <getopt.h>
 
 /* WARNING: DO NOT CHANGE THIS FILE.
  YOU PROBABLY DON'T EVEN NEED TO LOOK AT IT... */
 
-// Pointer to simulator memory
+/* Pointer to simulator memory */
 Byte *memory;
 
 void execute(Processor *processor,int prompt,int print) {
@@ -33,10 +34,10 @@ void execute(Processor *processor,int prompt,int print) {
     
     execute_instruction(instruction,processor,memory);
     
-    // enforce $0 being hard-wired to 0
+    /* enforce $0 being hard-wired to 0 */
     processor->R[0] = 0;
     
-    // print trace
+    /* print trace */
     if(print) {
         int i,j;
         for(i=0;i<8;i++) {
@@ -49,7 +50,7 @@ void execute(Processor *processor,int prompt,int print) {
     }
 }
 
-void load_program(uint8_t *mem, size_t memsize, int startaddr, const char *filename, int disasm) {
+void load_program(uint8_t *mem, size_t memsize UNUSED, int startaddr, const char *filename, int disasm) {
     FILE *file = fopen(filename, "r");
     const int MAX_SIZE = 50;
     char line[MAX_SIZE];
@@ -72,7 +73,7 @@ void load_program(uint8_t *mem, size_t memsize, int startaddr, const char *filen
 
 int main(int argc,char** argv) {
     /* options */
-    int opt_disasm = 0,opt_regdump = 0,opt_interactive = 0;
+    int opt_disasm = 0,opt_regdump = 0,opt_interactive = 0, i;
     
     /* the architectural state of the CPU */
     Processor processor;
@@ -123,7 +124,6 @@ int main(int argc,char** argv) {
     
     /* initialize the CPU */
     /* zero out all registers */
-    int i;
     for(i=0;i<32;i++) {
         processor.R[i] = 0;
     }
