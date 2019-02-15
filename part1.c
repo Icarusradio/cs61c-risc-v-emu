@@ -230,7 +230,7 @@ void print_jal(Instruction instruction) {
     /* YOUR CODE HERE */
 }
 
-void print_ecall(Instruction instruction UNUSED) {
+void print_ecall(Instruction instruction) {
     /* YOUR CODE HERE */
 }
 
